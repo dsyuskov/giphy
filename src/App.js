@@ -5,20 +5,32 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      result: null,
+    }
+  }
+
+  onSaveResult(result) {
+    this.setState({result: result})    
   }
 
   componentDidMount() {
-    const a = giphyService.helloWorld()
-    console.log(a);  
+    giphyService.getTranding()
+    .then((item) => this.onSaveResult(item));
   }
 
-  render() {
+  render() {    
+    const {result} = this.state;
+    if (!result) return null;
+
     return (
-      <div className="App">
-        <header className="App-header">     
-          <div>Welcome to giphy</div>
-        </header>
+      <div className="App">  
+
+          {result.map((item => {
+            return (
+              <div>{item.id}</div>
+            )
+          }))}        
       </div>
     );
   }
