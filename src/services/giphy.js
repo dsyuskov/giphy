@@ -10,7 +10,7 @@ class GiphyService {
   }
 
   async getTranding(offset, limit) {
-    console.log(limit);
+    console.log(`limit=${limit} offset=${offset}`);
     let url = `${PATH_TRENDING}?${API_KEY}&limit=${limit}&offset=${offset}`;
     const response = await fetch(url);
 
@@ -19,7 +19,30 @@ class GiphyService {
     }
     const data = await response.json();    
     return data.data.map((item) => {
-      console.log(item);
+      //console.log(item);
+      return {
+        id: item.id,
+        title: item.title,                
+        image: {
+          url: this.getUrl(item.id),          
+          width: item.images.original.width,
+          height: item.images.original.height,
+        }                
+      }      
+    });
+  }
+
+  async getSearch(searchString, limit) {    
+    //console.log(searchString);
+    let url = `${PATH_SEARCH}?${API_KEY}&limit=${limit}&q=${searchString}`;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`GiphyService getTranding failed, HTTP status ${response.status}`);
+    }
+    const data = await response.json();    
+    return data.data.map((item) => {
+      //console.log(item);
       return {
         id: item.id,
         title: item.title,                
