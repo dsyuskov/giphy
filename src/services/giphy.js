@@ -1,17 +1,17 @@
 const PATH_SEARCH = 'http://api.giphy.com/v1/gifs/search';
 const PATH_TRENDING = 'http://api.giphy.com/v1/gifs/trending';
 const API_KEY = 'api_key=NTrUfOQyMsagSSx8lEOU7Zx9x1eONTx1';
-const LIMIT = 'limit=3'
+//const LIMIT = 'limit=3'
 
 class GiphyService {
 
-  getUrl(id) {
-    //return `https://i.giphy.com/media/${id}/giphy.webp`;
+  getUrl(id) {    
     return `https://i.giphy.com/${id}.gif`;
   }
 
-  async getTranding() {
-    const url = `${PATH_TRENDING}?${API_KEY}&${LIMIT}`;
+  async getTranding(offset, limit) {
+    console.log(limit);
+    let url = `${PATH_TRENDING}?${API_KEY}&limit=${limit}&offset=${offset}`;
     const response = await fetch(url);
 
     if (!response.ok) {
