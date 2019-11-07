@@ -1,11 +1,17 @@
 const PATH_SEARCH = 'http://api.giphy.com/v1/gifs/search';
 const PATH_TRENDING = 'http://api.giphy.com/v1/gifs/trending';
 const API_KEY = 'api_key=NTrUfOQyMsagSSx8lEOU7Zx9x1eONTx1';
+const LIMIT = 'limit=3'
 
 class GiphyService {
 
+  getUrl(id) {
+    //return `https://i.giphy.com/media/${id}/giphy.webp`;
+    return `https://i.giphy.com/${id}.gif`;
+  }
+
   async getTranding() {
-    const url = `${PATH_TRENDING}?${API_KEY}`;
+    const url = `${PATH_TRENDING}?${API_KEY}&${LIMIT}`;
     const response = await fetch(url);
 
     if (!response.ok) {
@@ -13,11 +19,15 @@ class GiphyService {
     }
     const data = await response.json();    
     return data.data.map((item) => {
+      console.log(item);
       return {
         id: item.id,
-        title: item.title,        
-        url: item.url,
-        embed_url: item.embed_url,
+        title: item.title,                
+        image: {
+          url: this.getUrl(item.id),          
+          width: item.images.original.width,
+          height: item.images.original.height,
+        }                
       }      
     });
   }

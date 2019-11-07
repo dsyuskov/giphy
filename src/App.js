@@ -1,5 +1,6 @@
 import React from 'react';
 import giphyService from './services/giphy';
+import GiphySlider from './components/GiphySlider';
 
 class App extends React.Component {
 
@@ -14,23 +15,24 @@ class App extends React.Component {
     this.setState({result: result})    
   }
 
-  componentDidMount() {
+  onLoad() {
     giphyService.getTranding()
     .then((item) => this.onSaveResult(item));
+  }
+
+  componentDidMount() {
+    this.onLoad();
   }
 
   render() {    
     const {result} = this.state;
     if (!result) return null;
 
-    return (
+    return (      
       <div className="App">  
-
-          {result.map((item => {
-            return (
-              <div>{item.id}</div>
-            )
-          }))}        
+          <GiphySlider 
+            result = {result}
+          />
       </div>
     );
   }
