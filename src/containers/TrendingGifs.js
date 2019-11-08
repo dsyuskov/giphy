@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import GiphySlider from './GiphySlider';
+import GiphySlider from '../components/GiphySlider';
 import giphyService from '../services/giphy';
 
 export default class TrendingGifs extends Component {

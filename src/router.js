@@ -5,14 +5,14 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import MainLayout from './components/MainLayout'
 
 //pages
-import TrendingGifs from './components/TrendingGifs';
-import Search from './components/Search';
+import TrendingGifs from './containers/TrendingGifs';
+import SearchGifs from './containers/SearchGifs';
 
-export default(  
+export default(
   <BrowserRouter>
-    <MainLayout>       
+    <MainLayout>
       <Route path="/tranding-gifs" component={ TrendingGifs } />
-      <Route path="/search" component={Search} />              
+      <Route path="/search" component={ SearchGifs } />
     </MainLayout>
-  </BrowserRouter>  
+  </BrowserRouter>
 )
