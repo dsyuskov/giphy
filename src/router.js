@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import MainLayout from './components/MainLayout'
 
 //pages
+import Home from './components/Home';
 import TrendingGifs from './components/TrendingGifs';
 import SearchGifs from './components/SearchGifs';
 
@@ -12,9 +13,9 @@ export default(
   <BrowserRouter>
     <MainLayout>
       <Switch>
-        <Route exact path="/" component={ TrendingGifs } />
-        <Route path="/tranding-gifs" component={ TrendingGifs } />
-        <Route path="/search" component={ SearchGifs } />      
+        <Route exact path="/" component={ Home } />
+        <Route path="/tranding-gifs" render={ () => (<TrendingGifs limit='20'/>)} />
+        <Route path="/search" render={ () => (<SearchGifs limit='20'/>) } />      
       </Switch>
     </MainLayout>    
   </BrowserRouter>

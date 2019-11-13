@@ -4,31 +4,19 @@ export default class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
+      search: '',
     };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.onClick = this.onClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);    
   }
 
-  handleChange(event) {
-    this.setState( {value: event.target.value} );
-  }
-
-  handleSubmit(event) {
-    alert(this.state.value);
-    event.preventDefault();
-  }
-
-  onClick(event) {
-    this.props.onClick(this.state.value, 3);    
-    event.preventDefault();
+  handleChange(event) {    
+    this.setState( {search: event.target.value} );
   }
 
   render() {        
     return(
-      <form className="search"  onSubmit={this.onClick}>
+      <form className="search" onSubmit={(event) => {this.props.onClick(this.state.search);event.preventDefault();}}>
         <input
           className = "search__input"
           type = "text"

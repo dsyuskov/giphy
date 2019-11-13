@@ -26,13 +26,14 @@ class GiphyService {
     }));
   }
 
-  async getSearch(searchString, limit) {
-    const url = `${PATH_SEARCH}?${API_KEY}&limit=${limit}&q=${searchString}`;
+  async getSearch(searchString, offset, limit) {
+    const url = `${PATH_SEARCH}?${API_KEY}&limit=${limit}&offset=${offset}&q=${searchString}`;
     const response = await fetch(url);
 
     if (!response.ok) {
       throw new Error(`GiphyService getTranding failed, HTTP status ${response.status}`);
     }
+
     const data = await response.json();
     return data.data.map((item) => ({
       id: item.id,

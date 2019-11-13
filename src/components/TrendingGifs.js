@@ -1,18 +1,19 @@
 import React, {Component} from 'react';
 import GiphySlider from './GiphySlider';
 import giphyService from '../services/giphy';
-import Button from './Button';
 
-const initState = {
+const initTrend = {
   result: null,  
   limit: 5,
-  offset: 0
+  offset: 0,
+  page: 0
 }
 
 export default class TrendingGifs extends Component {
   constructor(props) {
     super(props);
-    this.state = {...initState}
+    console.log(this.props.limit);
+    this.state = {...initTrend, limit: this.props.limit}
     this.getTranding = this.getTranding.bind(this);
   }  
 
@@ -32,13 +33,12 @@ export default class TrendingGifs extends Component {
         newOffset = offset
       }
     }
+
     giphyService.getTranding(newOffset, limit)
-      .then((item) => {
-        this.setState({result: item, offset: newOffset});
-        console.log(newOffset, limit)});      
+      .then((item) => this.setState( {result: item, offset: newOffset} ));      
   }
 
-  componentDidMount() {
+  componentDidMount() {    
     this.getTranding();
   }
 
@@ -49,20 +49,11 @@ export default class TrendingGifs extends Component {
        
     return (
       <div className="trendinggifs">
-        <h2>Hello it is Tranding gifs</h2>
+        <h2>Tranding gifs</h2>
         <GiphySlider 
           result = {result}
-        />
-        <div className="App">
-          <Button 
-            value = "back"
-            onClick = {() => this.getTranding('back')}
-          />
-          <Button 
-            value = "next"
-            onClick = {() => this.getTranding('next')}
-          />
-        </div>
+          onClick = {(direction) => this.getTranding(direction)}
+        />        
       </div>
     )
   }
