@@ -46,7 +46,7 @@ export default class SearchGifs extends Component {
   render() {
     const { result } = this.state;       
     return (
-      <div className="trendinggifs">
+      <div className="search">
         <h2>Hello it is Searching gifs</h2>
         <Search 
           onClick = {(item) => this.getSearch(item)}

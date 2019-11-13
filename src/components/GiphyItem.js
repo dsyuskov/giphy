@@ -6,9 +6,10 @@ export default class GiphyItem extends Component{
     const {id, title, image} = this.props.item;
     return (
       <div className = "giphyItem">
-        <img src="" alt={id} />        
+        <img src={image.url} alt={title}></img>        
       </div>
     )
   }
 }
+//<img src="" alt={id} />        
 //<img src={image.url} alt={title}></img>

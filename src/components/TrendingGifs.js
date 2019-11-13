@@ -48,9 +48,9 @@ export default class TrendingGifs extends Component {
     if (!result) return null;
        
     return (
-      <div className="trendinggifs">
-        <h2>Tranding gifs</h2>
-        <GiphySlider 
+      <div className="trand">
+        <h2 className="trand__title">Tranding GIFs</h2>
+        <GiphySlider           
           result = {result}
           onClick = {(direction) => this.getTranding(direction)}
         />        
