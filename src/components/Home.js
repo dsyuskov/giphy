@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import TrendingGifs from './TrendingGifs';
 import SearchGifs from './SearchGifs';
 
 export default function Home(props) {
   return (
     <div>
-      <TrendingGifs 
+      <TrendingGifs
         limit = "5"
       />
-      <SearchGifs 
+      <SearchGifs
         limit = "5"
-      />   
-    </div>   
+      />
+    </div>
   );
 }

@@ -3,60 +3,68 @@ import GiphySlider from '../components/GiphySlider';
 import Search from '../components/Search';
 import giphyService from '../services/giphy';
 
-const initSearch = {  
-  result: null,  
+const initSearch = {
+  result: null,
   search: '',
   limit: 5,
   offset: 0
 }
 
-
 export default class SearchGifs extends Component {
   constructor(props) {
     super(props);
     this.state = {...initSearch, limit: this.props.limit}
-    this.getSearch = this.getSearch.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
+    this.getContent = this.getContent.bind(this);
   }
   
-  getSearch(newSearch, direction) {
-    const { offset, limit } = this.state; 
-    let newOffset;   
-    switch(direction) {
-      case 'next': {
-        newOffset = offset + limit;
-        break;
-      }
-      case 'back': {
-        newOffset = offset - limit >= 0 ? offset - limit: 0;
-        break;
-      }
-      default: {
-        newOffset = offset
-      }
-    }
+  getContent(content, newSearch = this.state.search) {
+    const {offset, limit, result} = this.state;
     
-    giphyService.getSearch(newSearch, newOffset, limit)
-      .then((item) => this.setState( {result: item, search: newSearch, offset: newOffset} ));          
+    giphyService.getContent(content, offset, limit, newSearch)
+      .then((item) => {        
+        const newResult = result === null? [...item.value] : [...result, ...item.value];
+        this.setState( {result: newResult, offset: item.offset, search: newSearch} )
+      });
+  }
+  
+  handleScroll() {
+    const height = document.documentElement.offsetHeight;
+    const offset = window.scrollY + window.innerHeight;
+    //detect the end page
+    if (offset >= height) {
+      this.getContent('search', this.state.search);
+    }
   }
 
   componentDidMount() {
-    this.getSearch(this.state.search);
+    if (this.props.page === 'search') {
+      document.addEventListener('scroll', this.handleScroll);
+    }
+    
+    this.getContent('search', this.state.search);
+  }
+
+  componentWillUnmount() {
+    if (this.props.page === 'search') {
+      document.removeEventListener('scroll', this.handleScroll);
+    }    
   }
 
   render() {
-    const { result } = this.state;       
+    const { result } = this.state;
     return (
       <div className="search">
         <h2>Hello it is Searching gifs</h2>
-        <Search 
-          onClick = {(item) => this.getSearch(item)}
+        <Search
+          onClick = {(item) => this.getContent('search', item)}
         />
         { result && 
-          <GiphySlider 
+          <GiphySlider
             result = {result}
-            onClick = {(direction) => this.getSearch(this.state.search, direction)}
+            onClick = {() => this.getContent('search', this.state.search)}
           />
-        }        
+        }
       </div>
     )
   }

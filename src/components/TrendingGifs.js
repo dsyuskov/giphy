@@ -3,46 +3,53 @@ import GiphySlider from './GiphySlider';
 import giphyService from '../services/giphy';
 
 const initTrend = {
-  result: null,  
+  result: null,
   limit: 5,
-  offset: 0,
-  page: 0
+  offset: 0
 }
 
 export default class TrendingGifs extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props.limit);
     this.state = {...initTrend, limit: this.props.limit}
-    this.getTranding = this.getTranding.bind(this);
-  }  
+    this.handleScroll = this.handleScroll.bind(this);
+    this.getContent = this.getContent.bind(this);
+  }
 
-  getTranding(direction) {    
-    const {offset, limit} = this.state; 
-    let newOffset;   
-    switch(direction) {
-      case 'next': {
-        newOffset = offset + limit;
-        break;
-      }
-      case 'back': {
-        newOffset = offset - limit >= 0 ? offset - limit: 0;
-        break;
-      }
-      default: {
-        newOffset = offset
-      }
+  getContent(content) {
+    const {offset, limit, result} = this.state;
+    
+    giphyService.getContent(content, offset, limit)
+      .then((item) => {
+        const newResult = result === null? [...item.value] : [...result, ...item.value];
+        this.setState( {result: newResult, offset: item.offset} )
+      });
+  }
+
+  handleScroll() {    
+    const height = document.documentElement.offsetHeight;
+    const offset = window.scrollY + window.innerHeight;
+    //detect end page
+    if (offset >= height) {
+      this.getContent('trend');
+    }      
+  }
+
+  componentDidMount() {
+    if (this.props.page === 'trend') {
+      document.addEventListener('scroll', this.handleScroll);
     }
 
-    giphyService.getTranding(newOffset, limit)
-      .then((item) => this.setState( {result: item, offset: newOffset} ));      
+    this.getContent('trend');
   }
 
-  componentDidMount() {    
-    this.getTranding();
+  componentWillUnmount() {
+    if (this.props.page === 'trend') {
+      document.removeEventListener('scroll', this.handleScroll);
+    }
   }
 
-  render() {    
+  render() {
     const { result } = this.state;
     
     if (!result) return null;
@@ -50,10 +57,10 @@ export default class TrendingGifs extends Component {
     return (
       <div className="trand">
         <h2 className="trand__title">Tranding GIFs</h2>
-        <GiphySlider           
+        <GiphySlider
           result = {result}
-          onClick = {(direction) => this.getTranding(direction)}
-        />        
+          onClick = {() => this.getContent('trend')}
+        />
       </div>
     )
   }

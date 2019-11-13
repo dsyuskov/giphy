@@ -14,9 +14,9 @@ export default(
     <MainLayout>
       <Switch>
         <Route exact path="/" component={ Home } />
-        <Route path="/tranding-gifs" render={ () => (<TrendingGifs limit='20'/>)} />
-        <Route path="/search" render={ () => (<SearchGifs limit='20'/>) } />      
+        <Route path="/tranding-gifs" render={ () => (<TrendingGifs limit='20' page='trend'/>)} />
+        <Route path="/search" render={ () => (<SearchGifs limit='20' page='search'/>) } />
       </Switch>
-    </MainLayout>    
+    </MainLayout>
   </BrowserRouter>
 )
