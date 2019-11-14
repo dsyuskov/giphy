@@ -1,15 +1,13 @@
 import React, {Component} from 'react';
-import './GiphyItem.scss';
+import '../scss/GiphyItem.scss';
 
 export default class GiphyItem extends Component{
   render() {
-    const {id, title, image} = this.props.item;
+    const {title, imageUrl} = this.props.item;
     return (
       <div className = "giphyItem">
-        <img src={image.url} alt={title}></img>        
+        <img src = { imageUrl } alt = { title }></img>
       </div>
     )
   }
 }
-//<img src="" alt={id} />        
-//<img src={image.url} alt={title}></img>

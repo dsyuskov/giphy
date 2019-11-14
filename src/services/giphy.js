@@ -37,11 +37,7 @@ class GiphyService {
       value:  data.data.map((item) => ({
               id: item.id,
               title: item.title,
-              image: {
-                url: this.getUrl(item.id),
-                width: item.images.original.width,
-                height: item.images.original.height,
-              },
+              imageUrl: this.getUrl(item.id),
             }))
     }
   } 

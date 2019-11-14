@@ -4,12 +4,14 @@ import SearchGifs from './SearchGifs';
 
 export default function Home(props) {
   return (
-    <div>
+    <div className = "contentContainer">
       <TrendingGifs
         limit = "5"
+        page = "home"
       />
       <SearchGifs
         limit = "5"
+        page = "home"
       />
     </div>
   );

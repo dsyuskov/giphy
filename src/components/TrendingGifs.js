@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import GiphySlider from './GiphySlider';
+import GiphyContainer from './GiphyContainer';
 import giphyService from '../services/giphy';
+import Button from './Button';
 
 const initTrend = {
   result: null,
@@ -31,7 +32,7 @@ export default class TrendingGifs extends Component {
     const offset = window.scrollY + window.innerHeight;
     //detect end page
     if (offset >= height) {
-      this.getContent('trend');
+      //this.getContent('trend');
     }      
   }
 
@@ -51,16 +52,29 @@ export default class TrendingGifs extends Component {
 
   render() {
     const { result } = this.state;
+    const { page } = this.props;
     
-    if (!result) return null;
-       
+    if (!result) {
+      return null;
+    }
+
+    let buttonClassVisible = '';
+
+    if (page === 'home') {      
+       buttonClassVisible = ' notVisible';
+    }
+
     return (
       <div className="trand">
         <h2 className="trand__title">Tranding GIFs</h2>
-        <GiphySlider
-          result = {result}
-          onClick = {() => this.getContent('trend')}
+        <GiphyContainer
+          result = {result}          
         />
+        <Button 
+          className = {"button" + buttonClassVisible}
+          value = "Load more"
+          onClick = {() => this.getContent('trend')}          
+        />  
       </div>
     )
   }

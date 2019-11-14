@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import GiphySlider from '../components/GiphySlider';
+import GiphyContainer from '../components/GiphyContainer';
 import Search from '../components/Search';
 import giphyService from '../services/giphy';
+import Button from './Button';
 
 const initSearch = {
   result: null,
@@ -42,7 +43,7 @@ export default class SearchGifs extends Component {
       document.addEventListener('scroll', this.handleScroll);
     }
     
-    this.getContent('search', this.state.search);
+    //this.getContent('search', this.state.search);
   }
 
   componentWillUnmount() {
@@ -53,15 +54,30 @@ export default class SearchGifs extends Component {
 
   render() {
     const { result } = this.state;
+    const { page } = this.props;
+
+    let buttonClassVisible = '';
+
+    if (page === 'home') {      
+      buttonClassVisible = ' notVisible';
+   }
     return (
       <div className="search">
         <h2>Hello it is Searching gifs</h2>
         <Search
           onClick = {(item) => this.getContent('search', item)}
         />
-        { result && 
-          <GiphySlider
-            result = {result}
+        {console.log(result)}
+        {result && 
+          <GiphyContainer
+            result = {result}            
+          />        
+        }
+        {console.log(result)}
+        {result && 
+          <Button 
+            className = {"button" + buttonClassVisible}
+            value = "Load more"
             onClick = {() => this.getContent('search', this.state.search)}
           />
         }
