@@ -20,10 +20,17 @@ export default class SearchGifs extends Component {
   }
   
   getContent(content, newSearch = this.state.search) {
+    console.log('1 -'+newSearch + '-');
+    console.log('2 -'+this.state.search + '-');
     const {offset, limit, result} = this.state;
+
+    if (newSearch !== this.state.search) {
+      console.log('new search')
+    }
     
     giphyService.getContent(content, offset, limit, newSearch)
       .then((item) => {        
+        //const newResult = (result === null || newSearch !== this.state.search)? [...item.value] : [...result, ...item.value];
         const newResult = result === null? [...item.value] : [...result, ...item.value];
         this.setState( {result: newResult, offset: item.offset, search: newSearch} )
       });
@@ -34,11 +41,17 @@ export default class SearchGifs extends Component {
     const offset = window.scrollY + window.innerHeight;
     //detect the end page
     if (offset >= height) {
-      this.getContent('search', this.state.search);
+      //this.getContent('search', this.state.search);
     }
   }
 
   componentDidMount() {
+    // const search = this.props.location.state ?  this.props.location.state.search : '';
+    // console.log('search');    
+    // if (search && search !== '') {
+    //   this.getContent('search', this.props.location.state.search);  
+    // }
+    
     if (this.props.page === 'search') {
       document.addEventListener('scroll', this.handleScroll);
     }
@@ -63,17 +76,14 @@ export default class SearchGifs extends Component {
    }
     return (
       <div className="search">
-        <h2>Hello it is Searching gifs</h2>
-        <Search
-          onClick = {(item) => this.getContent('search', item)}
-        />
-        {console.log(result)}
+        <h2>Hello it is Searching gifs</h2>    
+        
         {result && 
           <GiphyContainer
             result = {result}            
           />        
         }
-        {console.log(result)}
+        
         {result && 
           <Button 
             className = {"button" + buttonClassVisible}

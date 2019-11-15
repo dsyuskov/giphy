@@ -3,13 +3,13 @@ const PATH_TRENDING = 'http://api.giphy.com/v1/gifs/trending';
 const API_KEY = 'api_key=NTrUfOQyMsagSSx8lEOU7Zx9x1eONTx1';
 
 
-class GiphyService {  
+class GiphyService {
   getUrl(id) {
     return `https://i.giphy.com/${id}.gif`;
   }
 
   async getContent(content, offset, limit, searchString = '') {
-    let url = '';    
+    let url = '';
 
     switch(content) {
       case 'search': {
@@ -23,24 +23,23 @@ class GiphyService {
       default: {
         url = `${PATH_TRENDING}?${API_KEY}&limit=${limit}&offset=${offset}`;
       }
-    }    
+    }
 
     const response = await fetch(url);
 
     if (!response.ok) {
       throw new Error(`GiphyService failed, HTTP status ${response.status}`);
     }
-    
     const data = await response.json();
     return {
       offset: +offset + +limit,
       value:  data.data.map((item) => ({
-              id: item.id,
-              title: item.title,
-              imageUrl: this.getUrl(item.id),
-            }))
-    }
-  } 
+        id: item.id,
+        title: item.title,
+        imageUrl: this.getUrl(item.id),
+      })),
+    };
+  }
 }
 
 export default new GiphyService();
