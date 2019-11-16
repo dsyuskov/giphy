@@ -15,7 +15,7 @@ export default function Header(props) {
         <li className="menu__item menu__item--link"><Link className="menu__link" to="/stikers">Stikers</Link></li>
         <li className="menu__item">
           <Search
-            onClick = {props.onClick}
+            onClick = { props.onClick }
           />
         </li>
       </ul>

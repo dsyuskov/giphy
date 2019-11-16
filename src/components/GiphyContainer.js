@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component}  from 'react';
 import GiphyItem from './GiphyItem';
-import '../scss/GiphyContainer.scss';
+import '../scss/giphyContainer.scss';
 
 class GiphyContainer extends Component {
   render() {
@@ -15,8 +15,8 @@ class GiphyContainer extends Component {
         {result.map((item) => {
         return (
           <GiphyItem 
-            key = {item.id}
-            item = {item}
+            key = { item.id }
+            item = { item }
           />
           )
         })}

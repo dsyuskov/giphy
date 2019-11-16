@@ -35,9 +35,10 @@ class ContentContainer extends Component {
   }
   
   componentDidUpdate(prevProps) {
-    if (prevProps.limit !== this.props.limit || prevProps.content !== this.props.content || this.props.searchString !== prevProps.searchString) {
-      this.setState({ limit: this.props.limit, content: this.props.content, search: this.props.searchString })
-      this.getContent(this.props.content, 0, this.props.limit, this.props.searchString);
+    if ( prevProps.limit !== this.props.limit ||
+         prevProps.content !== this.props.content || this.props.searchString !== prevProps.searchString) {
+          this.setState({ limit: this.props.limit, content: this.props.content, search: this.props.searchString })
+          this.getContent(this.props.content, 0, this.props.limit, this.props.searchString);
     }
   }
 
@@ -62,7 +63,7 @@ class ContentContainer extends Component {
           result = { result }
         />
         <Button
-          className = { "button" + buttonIsNotVisible }
+          className = { "content-container__button" + buttonIsNotVisible }
           value = "Load more"
           onClick = { () => this.getContent(this.props.content) }
         />

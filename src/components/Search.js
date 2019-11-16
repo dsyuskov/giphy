@@ -7,25 +7,24 @@ export default class Search extends Component {
     this.state = {
       search: '',
     };
-
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event) {
-    this.setState( {search: event.target.value} );
+    this.setState({ search: event.target.value });
   }
 
   render() {
     return(
       <form 
-        className = "search" 
-        onSubmit = {(event) => {
+        className = "search"
+        onSubmit = { (event) => {
           this.props.onClick(this.state.search);
-          event.preventDefault();}}>
+          event.preventDefault();} }>
         <input
           className = "search__input"
           type = "text"
-          onChange = {this.handleChange}
+          onChange = { this.handleChange }
         />
         <input
           className = "search__button"

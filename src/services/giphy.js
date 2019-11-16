@@ -17,8 +17,9 @@ class GiphyService {
   }
 
   async getContent(content, offset = 0, limit = 5, searchString = '') {
+
     let url = '';
-    console.log(`${content}&limit=${limit}&offset=${offset}&q=${searchString}`);
+
     switch(content) {
       case contentAPI.SEARCH_GIFS: {
         url = `${PATH_SEARCH_GIFS}?${API_KEY}&limit=${limit}&offset=${offset}&q=${searchString}`;
@@ -46,6 +47,7 @@ class GiphyService {
     if (!response.ok) {
       throw new Error(`GiphyService failed, HTTP status ${response.status}`);
     }
+    
     const data = await response.json();
     return {
       newOffset: offset + +limit,

@@ -27,7 +27,8 @@ export default(
         <Route
           path = "/animals"
           render = { (props) => (
-            <ContentContainer title = "Animals gifs"
+            <ContentContainer 
+              title = "Animals gifs"
               limit = "20"
               content = { contentAPI.SEARCH_GIFS }
               searchString = "animals"
@@ -62,7 +63,7 @@ export default(
               content = { contentAPI.TRENDING_STIKERS }
               searchString = ""
             />)}
-        />        
+        />
       </Switch>
     </MainLayout>
   </BrowserRouter>
