@@ -9,40 +9,6 @@ body {
   background-color: #f4f4f4;
 }
 
-.header {
-  display: flex;  
-  align-items: center; 
-
-  &__logo {
-    margin-right: 2em;
-  }
-}
-
-.menu {  
-  display: flex;   
-  width: 100%; 
-  list-style: none;
-  justify-content: space-around;  
-
-  &__item {
-    width: 100%;    
-    text-align: center;    
-    :hover {
-      background-color: #818181;
-    }
-
-    a{          
-      display: block;    
-      width: 100%;  
-      padding-top: 1em;
-      padding-bottom: 1em;
-      text-decoration: none;
-      color: #413939;      
-    }
-    
-  }
-}
-
-.notVisible {
+.isNotVisible {
   display: none;
 }
