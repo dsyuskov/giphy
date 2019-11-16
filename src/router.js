@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import {contentAPI} from './services/giphy';
 
 import MainLayout from './components/MainLayout'
@@ -7,7 +7,7 @@ import Home from './components/Home';
 import ContentContainer from './components/ContentContainer';
 
 export default(
-  <BrowserRouter>
+  <HashRouter>
     <MainLayout>
       <Switch>
         <Route
@@ -66,5 +66,5 @@ export default(
         />
       </Switch>
     </MainLayout>
-  </BrowserRouter>
+  </HashRouter>
 )
