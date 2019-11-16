@@ -5,20 +5,22 @@ import '../scss/GiphyContainer.scss';
 class GiphyContainer extends Component {
   render() {
     const { result } = this.props;
+
     if (result.length === 0) {
       return null;
-    }    
+    }
+
     return (
-      <div className={"giphyContainer"}>
+      <div className= "giphy">
         {result.map((item) => {
-        return (          
+        return (
           <GiphyItem 
             key = {item.id}
             item = {item}
           />
           )
-        })} 
-      </div> 
+        })}
+      </div>
     )
   }
 }
