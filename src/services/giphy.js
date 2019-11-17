@@ -1,7 +1,7 @@
-const PATH_SEARCH_GIFS = 'http://api.giphy.com/v1/gifs/search';
-const PATH_SEARCH_STICKERS = 'http://api.giphy.com/v1/stickers/search';
-const PATH_TRENDING_GIFS = 'http://api.giphy.com/v1/gifs/trending';
-const PATH_TRENDING_STICKERS = 'http://api.giphy.com/v1/stickers/trending';
+const PATH_SEARCH_GIFS = 'https://api.giphy.com/v1/gifs/search';
+const PATH_SEARCH_STICKERS = 'https://api.giphy.com/v1/stickers/search';
+const PATH_TRENDING_GIFS = 'https://api.giphy.com/v1/gifs/trending';
+const PATH_TRENDING_STICKERS = 'https://api.giphy.com/v1/stickers/trending';
 const API_KEY = 'api_key=NTrUfOQyMsagSSx8lEOU7Zx9x1eONTx1';
 
 export const contentAPI = {
