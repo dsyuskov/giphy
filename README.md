@@ -1,9 +1,33 @@
-# giphy
+# Giphy
 
-Задача: написать веб-приложение, которое показывает гифки на странице, с использованием пользовательского ввода для поиска и API Giphy.
+Task: write a web application that displays gifs on a page using user input for search and the Giphy API.
 
-+ при запуске отображает актуальные GIF-файлы в колонке или сетке; 
-+ принимает ввод пользователя для поиска конкретных картинок; 
-+ в нижней части после результатов отображается кнопка «Загрузить ещё», которая получает дополнительную порцию гифок по тому же ключевому слову.
++ at startup, displays the current GIF-files in a column or grid;
++ accepts user input to search for specific images;
++ in the bottom part after the results, the “Load More” button is displayed, which receives an additional portion of gifs for the same keyword.
 
-Идея задачи взята тут https://proglib.io/p/8-zadach-dlya-praktiki-frontend-razrabotchika-2019-11-04
+Idea of ​​the task https://proglib.io/p/8-zadach-dlya-praktiki-frontend-razrabotchika-2019-11-04
+
+Application - giphy on the basis of React + Router
+
+Demo https://dsyuskov.github.io/giphy
+
+## Available Scripts
+
+In the project directory, you can run:
+
+### `npm start`
+
+Runs the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+The page will reload if you make edits.<br>
+You will also see any lint errors in the console.
+
+### `npm run build`
+
+Builds the app for production to the `build` folder.<br>
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.<br>
+Your app is ready to be deployed!
